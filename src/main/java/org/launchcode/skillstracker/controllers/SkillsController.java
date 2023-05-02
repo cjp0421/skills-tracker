@@ -1,9 +1,7 @@
 package org.launchcode.skillstracker.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @ResponseBody
@@ -21,6 +19,7 @@ public class SkillsController {
             "<li>TypeScript</li>" +
             "<li>SQL</li>" +
             "</ol>" +
+            "<p>Click <a href='/form'>HERE</a> to choose your favorite languages!</p>" +
             "</body>" +
             "</html>";
 
@@ -30,18 +29,55 @@ public class SkillsController {
     public String displaySkillsForm(){
     return "<html>" +
             "<body>" +
-            "<form action='/results'>" +
+            "<form action='/form' method='POST'>" +
             "<label>Name: </label>" +
-            "<input type='text' name='userName'/>" +
+            "<input type='text' name='name'/>" +
+            "<br/>" +
+            "<br/>" +
+            "<label>My Favorite Language is: </label>" +
             "<select name='fav1'>" +
-            "<option value='javascript'>JavaScript</option>" +
-            "<option value='java'>Java</option>" +
-            "<option value='typescript'>TypeScript</option>" +
-            "<option value='sql'>SQL</option>" +
+            "<option value='JavaScript'>JavaScript</option>" +
+            "<option value='Java'>Java</option>" +
+            "<option value='TypeScript'>TypeScript</option>" +
+            "<option value='SQL'>SQL</option>" +
+            "</select>" +
+            "<br/>" +
+            "<label>My Second Favorite Language is: </label>" +
+            "<select name='fav2'>" +
+            "<option value='JavaScript'>JavaScript</option>" +
+            "<option value='Java'>Java</option>" +
+            "<option value='TypeScript'>TypeScript</option>" +
+            "<option value='SQL'>SQL</option>" +
+            "</select>" +
+            "<br/>" +
+            "<label>My Third Favorite Language is: </label>" +
+            "<select name='fav3'>" +
+            "<option value='JavaScript'>JavaScript</option>" +
+            "<option value='Java'>Java</option>" +
+            "<option value='TypeScript'>TypeScript</option>" +
+            "<option value='SQL'>SQL</option>" +
+            "</select>" +
+            "<br/>" +
+            "<input type='submit' value='Submit'/>" +
             "</form>"+
             "</body>" +
             "</html>";
 
         }
+
+        @PostMapping("/form")
+            public String skillsOutput(@RequestParam String name, String fav1, String fav2, String fav3){
+            return "<html>" +
+                    "<body>" +
+                    "<h1>"+ name + "'s Favorite Languages</h1>" +
+                    "<ol>" +
+                    "<li>"+fav1+"</li>" +
+                    "<li>"+fav2+"</li>" +
+                    "<li>"+fav3+"</li>" +
+                    "</ol>" +
+                    "</body>" +
+                    "</html>";
+        }
+
     }
 
